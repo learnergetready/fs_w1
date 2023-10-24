@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 const Header = (props) => <h1>{props.heading}</h1>
 const Button = (props) => <button onClick={props.handleClick}>{props.text}</button>
-const Display = (props) => <p>{props.feedback} {props.amount}</p>
+const Display = (props) => <p>{props.statname} {props.stat}</p>
 
 const App = () => {
   // tallenna napit omaan tilaansa
@@ -18,9 +18,12 @@ const App = () => {
       <Button handleClick={ () => {setBad(bad+1)} } text="bad" />
 
       <Header heading ="statistics" />
-      <Display feedback="good" amount={good}/>
-      <Display feedback="neutral" amount={neutral}/>
-      <Display feedback="bad" amount={bad}/>
+      <Display statname="good" stat={good}/>
+      <Display statname="neutral" stat={neutral}/>
+      <Display statname="bad" stat={bad}/>
+      <Display statname="all" stat={good + neutral + bad}/>
+      <Display statname="average" stat={ (good*1 + neutral*0 + bad*(-1)) / ( good + neutral + bad ) }/>
+      <Display statname="positive" stat={100* good / ( good + neutral + bad ) + " %"}/>
     </div>
   )
 }
